@@ -1,54 +1,84 @@
-import React from 'react'
-import Waves from '../../LocalAssets/Waves'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination, Autoplay } from 'swiper/modules';
+import { motion } from 'framer-motion';
+import { Typewriter } from 'react-simple-typewriter';
+import 'swiper/css';
+import 'swiper/css/pagination';
+
+const slides = [
+  {
+    title: 'Welcome to Infinex Technologies',
+    headingWords: [
+      'IT Solutions & Website Development',
+      'Real-World Developer Experience',
+      'Creating the Future, Together',
+    ],
+    text: 'We help businesses transform and thrive in the digital age with cutting-edge technology solutions and expert guidance.',
+    image: '/assets/img/working-4.jpg',
+  },
+];
 
 const HeroSection = () => {
   return (
-    <section id="hero" className="hero section dark-background">
+    <section className="hero-section">
+      <Swiper
+        pagination={{ clickable: true }}
+        modules={[Pagination, Autoplay]}
+        loop={true}
+        autoplay={{
+          delay: 5000,
+          disableOnInteraction: false,
+          pauseOnMouseEnter: true,
+        }}
+        className="hero-swiper"
+      >
+        {slides.map((slide, index) => (
+          <SwiperSlide key={index}>
+            <div className="hero-content">
+              <motion.div
+                className="hero-text"
+                initial={{ opacity: 0, x: -60 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+              >
+                <h5>{slide.title}</h5>
+                <h1 className="typewriter-text">
+                  <Typewriter
+                    words={slide.headingWords}
+                    loop={true}
+                    cursor
+                    cursorStyle="❚"
+                    typeSpeed={70}
+                    deleteSpeed={50}
+                    delaySpeed={1500}
+                  />
+                </h1>
+                <p>{slide.text}</p>
 
-      <div id="hero-carousel" data-bs-interval="5000" className="container carousel carousel-fade" data-bs-ride="carousel">
+                {/*<div className="hero-buttons">
+                  <motion.button className="btn-primary">🚀 Get Started</motion.button>
+                  <motion.button className="btn-primary">🎬 Watch Now</motion.button>
+                </div>*/}
+              </motion.div>
 
-        {/* <!-- Slide 1 --> */}
-        <div className="carousel-item active">
-          <div className="carousel-container">
-            <h2 className="animate__animated animate__fadeInDown">Welcome to Infinex Tech</h2>
-            <p className="animate__animated animate__fadeInUp">We help businesses transform and thrive in the digital age with cutting-edge technology solutions and expert guidance.</p>
-            <Link to={"#about"} className="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</Link>
-          </div>
-        </div>
-
-        {/* <!-- Slide 2 --> */}
-        <div className="carousel-item">
-          <div className="carousel-container">
-            <h2 className="animate__animated animate__fadeInDown">Empowering Innovation</h2>
-            <p className="animate__animated animate__fadeInUp">At Infinex Technologies, we are driven by a passion for innovation and a commitment to empowering aspiring developers with hands-on experience and real-world exposure. Based in Jaipur, we specialize in delivering cutting-edge solutions across a spectrum of digital services.  </p>
-            <Link to={"#about"} className="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</Link>
-          </div>
-        </div>
-
-        {/* <!-- Slide 3 --> */}
-        <div className="carousel-item">
-          <div className="carousel-container">
-            <h2 className="animate__animated animate__fadeInDown">Shaping Digital Journeys</h2>
-            <p className="animate__animated animate__fadeInUp">At Infinex Technologies, we don’t just create software; we shape digital journeys. Join us as we inspire innovation, nurture talent, and deliver excellence. Explore endless possibilities with Infinex Technologies!.</p>
-            <Link to={"#about"} className="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</Link>
-          </div>
-        </div>
-
-        <Link to={"#about"} className="carousel-control-prev" href="#hero-carousel" role="button" data-bs-slide="prev">
-          <span className="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
-        </Link>
-
-        <Link to={"#about"} className="carousel-control-next" href="#hero-carousel" role="button" data-bs-slide="next">
-          <span className="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
-        </Link>
-
-      </div>
-
-      <Waves />
-
+              <motion.div
+                className="hero-image-wrapper"
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.5 }}
+              >
+                <div className="image-circle">
+                  <img src={slide.image} alt="Hero" className="hero-image" />
+                </div>
+              </motion.div>
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </section>
-  )
-}
+  );
+};
 
-export default HeroSection
+export default HeroSection;
+

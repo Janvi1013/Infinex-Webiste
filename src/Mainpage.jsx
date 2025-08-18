@@ -9,9 +9,10 @@ import Services from './user/Pages/Services';
 import PageNotFound from './user/Pages/PageNotFound'
 import Contact from './user/Pages/Contact';
 import Portfolio from './user/Pages/Portfolio'
-import Team from './user/Pages/Team';
 import Blog from './user/Pages/Blog';
-import Dashboard from './admin/Pages/Dashboard';
+import Software from './user/Pages/Software';
+import UIUX from './user/Pages/uiux';
+//import Dashboard from './admin/Pages/Dashboard';
 import Login from './admin/Pages/Login';
 import AdminRoute from './Routes/AdminRoute';
 import UserRoute from './Routes/UserRoute';
@@ -20,12 +21,23 @@ import ForgotPassword from './admin/Pages/ForgotPassword';
 import ConfirmOTP from './admin/Pages/ConfirmOTP';
 import ResetPassword from './admin/Pages/ResetPassword';
 import LoginRoute from './Routes/LoginRoute';
-import ManageNavigation from './admin/Pages/ManageNavigation';
+//import ManageNavigation from './admin/Pages/ManageNavigation';
 import AboutAdmin from './admin/Pages/AboutAdmin';
 import ServicesAdmin from './admin/Pages/ServicesAdmin';
 import TestimonialAdmin from './admin/Pages/TestimonialAdmin';
 import BlogAdmin from './admin/Pages/BlogAdmin';
-//import AboutAdminJanvi from './admin/Pages/AboutAdminJanvi';
+import CareerPage from './user/Pages/Career';
+import HRInternJobPage from './user/Pages/HrIntern';
+import BlogDetailPage from './user/Pages/BlogDetail_1';
+import BlogDetailPageNew from './user/Pages/BlogDetail_2';
+import DigitalMarketing from './user/Pages/digital';
+import VideoEditing from './user/Pages/video';
+import SocialMediaMarketing from './user/Pages/social';
+import SEOSMOServices from './user/Pages/seo';
+import MobileDevelopment from './user/Pages/mobile';
+import SeniorSoftwareEngineer from './user/Pages/Engineer';
+import UIUXDesigner from './user/Pages/Designer';
+
 
 const Mainpage = () => {
   
@@ -40,10 +52,23 @@ const Mainpage = () => {
         <Route path={"/"} element={<UserRoute Component={Home} />} />
         <Route path={"/About"} element={<UserRoute Component={About} />} />
         <Route path={"/Services"} element={<UserRoute Component={Services} />} />
-        <Route path={"/Portfolio"} element={<UserRoute Component={Portfolio} />} />
-        <Route path={"/Team"} element={<UserRoute Component={Team} />} />
+		<Route path={"/Software"} element={<UserRoute Component={Software} />} />
+			  <Route path={"/uiux"} element={<UserRoute Component={UIUX} />} />
+			  <Route path={"/digital"} element={<UserRoute Component={DigitalMarketing} />} />
+			  <Route path={"/video"} element={<UserRoute Component={VideoEditing} />} />
+			  <Route path={"/social"} element={<UserRoute Component={SocialMediaMarketing} />} />
+			  <Route path={"/seo"} element={<UserRoute Component={SEOSMOServices} />} />
+			   <Route path={"/mobile"} element={<UserRoute Component={MobileDevelopment} />} />
+
+	    <Route path={"/Portfolio"} element={<UserRoute Component={Portfolio} />} />
+			  <Route path={"/CareerPage"} element={<UserRoute Component={CareerPage} />} />
+			  <Route path={"/Engineer"} element={<UserRoute Component={SeniorSoftwareEngineer} />} />
+			    <Route path={"/Designer"} element={<UserRoute Component={UIUXDesigner} />} />
         <Route path={"/Blog"} element={<UserRoute Component={Blog} />} />
-        <Route path={"/Contact"} element={<UserRoute Component={Contact} />} />
+		<Route path={"/Contact"} element={<UserRoute Component={Contact} />} />
+			  <Route path={"/HrIntern"} element={<UserRoute Component={HRInternJobPage} />} />
+			  <Route path={"/BlogDetail_1"} element={<UserRoute Component={BlogDetailPage} />} />
+			   <Route path={"/BlogDetail_2"} element={<UserRoute Component={BlogDetailPageNew} />} />
 
         {/* Admin Routes  */}
         {/*<Route path={"/dashboard"} element={<AdminRoute Component={Dashboard} />} />*/}

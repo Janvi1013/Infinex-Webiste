@@ -1,157 +1,239 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { MapPin, Phone, Mail, Clock, Send, User, MessageSquare } from 'lucide-react';
 
 const ContactSection = () => {
-    const [formData, setformData] = useState({
-        name : "",
-        email : "",
-        subject : "",
-        message : ""
-    })
-    const [formError, setformError] = useState({})
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  });
+
+  const [formError, setFormError] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+  
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
     
-    const emailRegex = /^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/;
+    // Clear error when user starts typing
+    if (formError[name]) {
+      setFormError(prev => ({ ...prev, [name]: '' }));
+    }
+  };
 
+  const validate = () => {
+    let errors = {};
+    let valid = true;
 
-    const handlechange = (e) => {
-        setformData({...formData, [e.target.name] : e.target.value})
+    if (!formData.name?.trim() || formData.name.length < 4) {
+      errors.name = 'Name should be at least 4 characters';
+      valid = false;
     }
 
-    console.log("form error : ", formError )
-    const handleSubmit = () => {
-        if(varify()){
-            // console.log("Form Data : ", formData )
-        }
+    if (!formData.email?.trim() || !emailRegex.test(formData.email)) {
+      errors.email = 'Enter a valid email address';
+      valid = false;
     }
 
-
-    const varify = () => {
-        let localError = {};
-        let valid = true;
-
-        if(formData.name.length === 0){
-            localError.name = "Name must be required!"
-            valid = false
-        }else if (formData.name.length < 4){
-            localError.name = "Name should be minimum 4 character!"
-            valid = false
-        }
-
-        if(formData.email.length <=0){
-            localError.email = "Email must be required!"
-            valid = false
-        }else if(!emailRegex.test(formData.email)){
-            localError.email = "Not a valid email!"
-            valid = false
-        }
-
-        if(formData.subject.length === 0){
-            localError.subject = "Subject must be required!"
-            valid = false
-        }else if (formData.subject.length < 6){
-            localError.subject = "Subject should be minimum 6 character!"
-            valid = false
-        }
-
-        if(formData.message.length === 0){
-            localError.message = "Message must be required!"
-            valid = false
-        }else if (formData.message.length < 10){
-            localError.message = "Message should be minimum 10 character!"
-            valid = false
-        }
-
-
-        setformError(localError)
-
+    if (!formData.subject?.trim() || formData.subject.length < 6) {
+      errors.subject = 'Subject should be at least 6 characters';
+      valid = false;
     }
+
+    if (!formData.message?.trim() || formData.message.length < 10) {
+      errors.message = 'Message should be at least 10 characters';
+      valid = false;
+    }
+
+    setFormError(errors);
+    return valid;
+  };
+
+  const handleSubmit = async (e) => {
+    e?.preventDefault?.();
+    if (validate()) {
+      setIsSubmitting(true);
+      
+      // Simulate API call
+      setTimeout(() => {
+        console.log('Form submitted:', formData);
+        setIsSubmitting(false);
+        setSubmitSuccess(true);
+        setFormData({ name: '', email: '', subject: '', message: '' });
+        
+        // Reset success message after 3 seconds
+        setTimeout(() => setSubmitSuccess(false), 3000);
+      }, 1500);
+    }
+  };
+
+  const contactInfo = [
+    {
+      icon: MapPin,
+      title: 'Address',
+      content: 'Gali No. 5, opp. Durgapura Railway Station, Jadon Nagar-A, Nalanda Vihar, Durgapura, Jaipur, Rajasthan 302018',
+      link: 'https://maps.google.com?q=Infinex+Technologies+Jaipur',
+      external: true
+    },
+    {
+      icon: Phone,
+      title: 'Phone',
+      content: '+91 89551 00493',
+      link: 'tel:+918955100493'
+    },
+    {
+      icon: Mail,
+      title: 'Email',
+      content: 'info@infinextechnologies.com',
+      link: 'mailto:info@infinextechnologies.com'
+    },
+    {
+      icon: Clock,
+      title: 'Open Hours',
+      content: 'Mon - Sat, 10:00 AM - 7:00 PM'
+    }
+  ];
 
   return (
-    <>
-        <section id="contact" className="contact section">
+    <section className="home-contact-section">
+      <div className="home-contact-container">
+        {/* Section Header */}
+        <div className="home-contact-header">
+          <h2 className="home-contact-title">Contact Us</h2>
+          <p className="home-contact-subtitle">
+            We'd love to hear from you. Send us a message and we'll respond as soon as possible.
+          </p>
+        </div>
 
-            <div className="container section-title" data-aos="fade-up">
-            <h2>Contact</h2>
-            <p>Contact Us</p>
+        <div className="home-contact-content">
+          {/* Contact Info Cards */}
+          <div className="home-contact-info">
+            {contactInfo.map((item, index) => {
+              const IconComponent = item.icon;
+              return (
+                <div key={index} className="home-contact-card">
+                  <div className="home-card-icon">
+                    <IconComponent size={24} />
+                  </div>
+                  <div className="home-card-content">
+                    <h3 className="home-card-title">{item.title}</h3>
+                    {item.link ? (
+                      <a 
+                        href={item.link}
+                        className="home-card-link"
+                        target={item.external ? "_blank" : undefined}
+                        rel={item.external ? "noopener noreferrer" : undefined}
+                      >
+                        {item.content}
+                      </a>
+                    ) : (
+                      <p className="home-card-text">{item.content}</p>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Contact Form */}
+          <div className="home-contact-form-wrapper">
+            <div className="home-form-header">
+              <MessageSquare className="home-form-icon" size={28} />
+              <h3 className="home-form-title">Send Us a Message</h3>
             </div>
-
-            <div className="container" data-aos="fade" data-aos-delay="100">
-
-            <div className="row gy-4">
-
-                <div className="col-lg-4">
-                <div className="info-item d-flex" data-aos="fade-up" data-aos-delay="200">
-                    <i className="bi bi-geo-alt flex-shrink-0"></i>
-                    <div>
-                        <Link to={"/"} href="https://g.co/kgs/wL2LUqV" style={{textDecoration : "none", color: "black"}}>
-                            <h3>Address</h3>
-                            <p> Infinex Technologies Pvt. Ltd | Jaipur
-        https://g.co/kgs/wL2LUqV </p>
-                        </Link>
-                    </div>
+            
+            {submitSuccess && (
+              <div className="home-success-message">
+                <div className="home-success-content">
+                  <div className="home-success-icon">✓</div>
+                  <span>Message sent successfully! We'll get back to you soon.</span>
                 </div>
+              </div>
+            )}
 
-                <div className="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
-                        <i className="bi bi-telephone flex-shrink-0"></i>
-                        <div>
-                            <Link to={"tel:+911234567890"} style={{textDecoration : "none", color: "black"}}>
-                                <h3>Call Us</h3>
-                                <p>+918955100493</p>
-                            </Link>
-                        </div>
+            <div className="home-contact-form">
+              <div className="home-form-group">
+                <div className="home-input-wrapper">
+                  <User className="home-input-icon" size={18} />
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Your Name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    className={formError.name ? 'error' : ''}
+                  />
                 </div>
+                {formError.name && <span className="home-error-message">{formError.name}</span>}
+              </div>
 
-                <div className="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
-                    <i className="bi bi-envelope flex-shrink-0"></i>
-                    <div>
-                        <aLink to={"mailto:info@infinextechnologies.com"} style={{textDecoration : "none", color: "black"}}>
-                            <h3>Email Us</h3>
-                            <p>info@infinextechnologies.com</p>
-                        </aLink>
-                    </div>
+              <div className="home-form-group">
+                <div className="home-input-wrapper">
+                  <Mail className="home-input-icon" size={18} />
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Your Email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className={formError.email ? 'error' : ''}
+                  />
                 </div>
+                {formError.email && <span className="home-error-message">{formError.email}</span>}
+              </div>
 
+              <div className="home-form-group">
+                <div className="home-input-wrapper">
+                  <MessageSquare className="home-input-icon" size={18} />
+                  <input
+                    type="text"
+                    name="subject"
+                    placeholder="Subject"
+                    value={formData.subject}
+                    onChange={handleChange}
+                    className={formError.subject ? 'error' : ''}
+                  />
                 </div>
+                {formError.subject && <span className="home-error-message">{formError.subject}</span>}
+              </div>
 
-                <div className="col-lg-8">
-                    <div className="php-email-form" data-aos="fade-up" data-aos-delay="200">
-                        <div className="row gy-4">
-
-                        <div className="col-md-6">
-                            <input type="text" name="name" className="form-control" placeholder="Your Name" onChange={handlechange} />
-                        </div>
-
-                        <div className="col-md-6 ">
-                            <input type="email" className="form-control" name="email" placeholder="Your Email" required="" onChange={handlechange} />
-                        </div>
-
-                        <div className="col-md-12">
-                            <input type="text" className="form-control" name="subject" placeholder="Subject" required="" onChange={handlechange} />
-                        </div>
-
-                        <div className="col-md-12">
-                            <textarea className="form-control" name="message" rows="6" placeholder="Message" required="" onChange={handlechange}></textarea>
-                        </div>
-
-                        <div className="col-md-12 text-center">
-                            <div className="loading">Loading</div>
-                            {(formError.name || formError.email || formError.subject || formError.message) && <div className="error-message">{(formError.name || formError.email || formError.subject || formError.message)}</div>}
-                            <div className="sent-message">Your message has been sent. Thank you!</div>
-
-                            <button type="submit" onClick={handleSubmit}>Send Message</button>
-                        </div>
-
-                        </div>
-                    </div>
+              <div className="home-form-group">
+                <div className="home-textarea-wrapper">
+                  <textarea
+                    name="message"
+                    placeholder="Your Message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    className={formError.message ? 'error' : ''}
+                  />
                 </div>
+                {formError.message && <span className="home-error-message">{formError.message}</span>}
+              </div>
 
+              <div 
+                className="home-submit-btn"
+                onClick={handleSubmit}
+                style={{ cursor: isSubmitting ? 'not-allowed' : 'pointer' }}
+              >
+                {isSubmitting ? (
+                  <div className="home-loading-spinner"></div>
+                ) : (
+                  <>
+                    <Send size={18} />
+                    <span>Send Message</span>
+                  </>
+                )}
+              </div>
             </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
 
-            </div>
-
-        </section>
-    </>
-  )
-}
-
-export default ContactSection
+export default ContactSection;

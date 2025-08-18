@@ -5,7 +5,7 @@ import AboutSection from '../Component/AboutSection'
 import FeatureSection from "../Component/FeatureSection";
 import CallToAction from "../Component/CallToAction";
 import ServicesSection from '../Component/ServicesSection'
-import FaqSection from '../Component/FaqSection';
+import HowWeWork from '../Component/HowWeWork';
 import ContactSection from '../Component/ContactSection';
 
 const Home = () => {
@@ -16,7 +16,7 @@ const Home = () => {
       <FeatureSection />
       <CallToAction />
       <ServicesSection />
-      <FaqSection />
+      <HowWeWork />
       <ContactSection />
     </main>
   )
