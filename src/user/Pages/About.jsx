@@ -343,7 +343,7 @@ const techCategories = [
                 padding: "10px 20px",
                 borderRadius: "999px",
                 border: "none",
-                backgroundColor: activeCategory === cat.name ? "#007acc" : "#dbe9f5",
+                backgroundColor: activeCategory === cat.name ? "#0073b9" : "#dbe9f5",
                 color: activeCategory === cat.name ? "#fff" : "#333",
                 fontWeight: "600",
                 cursor: "pointer",

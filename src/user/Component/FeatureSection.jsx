@@ -48,7 +48,7 @@ const features = [
         <div className="features-home-wrapper">
           <div className="features-home-text">
             <div className="features-home-header">
-              <h2 className="features-home-section-title">Why Choose Our Software Company</h2>
+              <h2 className="features-home-section-title">WHY CHOOSE OUR COMPANY</h2>
               <p className="features-home-section-subtitle">
                 We combine technical expertise with creative innovation to deliver exceptional digital solutions. 
                 Here's what sets us apart in development, design, marketing, and mobile technologies.

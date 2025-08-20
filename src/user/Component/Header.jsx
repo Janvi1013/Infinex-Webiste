@@ -8,7 +8,10 @@ const Header = () => {
   const [mobileDropdownOpen, setMobileDropdownOpen] = useState(false);
   const dropdownRef = useRef();
   const hoverTimeout = useRef();
-   const [scrolled, setScrolled] = useState(false);
+	const [scrolled, setScrolled] = useState(false);
+	const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+const [mobilePagesOpen, setMobilePagesOpen] = useState(false);
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -57,10 +60,12 @@ const [mobileContactOpen, setMobileContactOpen] = useState(false);
         <nav className="nav-menu">
           <a href="/">Home</a>
           <a href="/about">About</a>
-          <a href="/services">Services</a>
+				  <a href="/services">Services</a>
+				     <a href="/portfolio">Portfolio</a>
+              <a href="/careerpage">Careers</a>
 
           {/* ✅ Dropdown with hover and click support */}
-          <div
+          {/*<div
             className="dropdown-wrapper"
             ref={dropdownRef}
             onMouseEnter={handleMouseEnter}
@@ -76,7 +81,7 @@ const [mobileContactOpen, setMobileContactOpen] = useState(false);
               <a href="/portfolio">Portfolio</a>
               <a href="/careerpage">Careers</a>
             </div>
-          </div>
+          </div>*/}
 
           <a href="/blog">Blog</a>
           <a href="/contact">Contact</a>
@@ -115,53 +120,42 @@ const [mobileContactOpen, setMobileContactOpen] = useState(false);
           <li><a href="/">Home</a></li>
 				  <li><a href="/about">About</a></li>
 				  
-          <li
-            className="mobile-dropdown-toggle"
-            onClick={() => setMobileDropdownOpen((prev) => !prev)}
-            onMouseEnter={() => setMobileDropdownOpen(true)}
-            onMouseLeave={() => setMobileDropdownOpen(false)}
-          >
-            Services +
-            <ul className={`mobile-submenu ${mobileDropdownOpen ? "show" : ""}`}>
-              <li><a href="/Software">Software Development</a></li>
-			  <li><a href="/mobile">Mobile Development</a></li>
-			  <li><a href="/digital">Digital Marketing</a></li>
-			  <li><a href="/seo">SEO & SMO </a></li>
-			  <li><a href="/video">Video Editing</a></li>
-			  <li><a href="/social">Social Media Marketing</a></li>
-              <li><a href="/uiux">UIUX Designing</a></li>
-            </ul>
-          </li>
+       <li
+  className="mobile-dropdown-toggle"
+  onClick={() => setMobileServicesOpen((prev) => !prev)}
+>
+  Services -
+  <ul className={`mobile-submenu ${mobileServicesOpen ? "show" : ""}`}>
+    <li><a href="/Software">Software Development</a></li>
+    <li><a href="/mobile">Mobile Development</a></li>
+    <li><a href="/digital">Digital Marketing</a></li>
+    <li><a href="/seo">SEO & SMO</a></li>
+    <li><a href="/video">Video Editing</a></li>
+    <li><a href="/social">Social Media Marketing</a></li>
+    <li><a href="/uiux">UI/UX Designing</a></li>
+  </ul>
+</li>
 
-          <li
-            className="mobile-dropdown-toggle"
-            onClick={() => setMobileDropdownOpen((prev) => !prev)}
-            onMouseEnter={() => setMobileDropdownOpen(true)}
-            onMouseLeave={() => setMobileDropdownOpen(false)}
-          >
-            Pages +
-            <ul className={`mobile-submenu ${mobileDropdownOpen ? "show" : ""}`}>
-              <li><a href="/portfolio">Portfolio</a></li>
-              <li><a href="/careerpage">Career</a></li>
-            </ul>
-          </li>
 
-          <li><a href="/blog">Blog</a></li>
-          {/*<li><a href="/contact">Contact</a></li>*/}
-		  <li
+
+    <li><a href="/portfolio">Portfolio</a></li>
+				  <li><a href="/careerpage">Career</a></li>
+				   <li><a href="/blog">Blog</a></li>
+
+
+		 <li
   className="mobile-dropdown-toggle"
   onClick={() => setMobileContactOpen((prev) => !prev)}
-  onMouseEnter={() => setMobileContactOpen(true)}
-  onMouseLeave={() => setMobileContactOpen(false)}
 >
-  <li><a href="/contact">Contact +</a></li>
+  Contact +
   <ul className={`mobile-submenu ${mobileContactOpen ? "show" : ""}`}>
     <li><a href="tel:+918955100493">📞 Call Us</a></li>
     <li><a href="https://wa.me/918955100493" target="_blank" rel="noopener noreferrer">💬 WhatsApp</a></li>
     <li><a href="mailto:info@infinextechnologies.com">📧 Email Us</a></li>
   </ul>
 </li>
-        </ul>
+				  </ul>
+
       </div>
     </>
   );
