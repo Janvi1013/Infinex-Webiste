@@ -147,7 +147,7 @@ const [mobileContactOpen, setMobileContactOpen] = useState(false);
   className="mobile-dropdown-toggle"
   onClick={() => setMobileContactOpen((prev) => !prev)}
 >
-  Contact -
+  <a href="/contact">Contact -</a>
   <ul className={`mobile-submenu ${mobileContactOpen ? "show" : ""}`}>
     <li><a href="tel:+918955100493">📞 Call Us</a></li>
     <li><a href="https://wa.me/918955100493" target="_blank" rel="noopener noreferrer">💬 WhatsApp</a></li>
