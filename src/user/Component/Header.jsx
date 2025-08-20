@@ -124,7 +124,7 @@ const [mobileContactOpen, setMobileContactOpen] = useState(false);
   className="mobile-dropdown-toggle"
   onClick={() => setMobileServicesOpen((prev) => !prev)}
 >
-  Services -
+<a href="/services">Services -</a>
   <ul className={`mobile-submenu ${mobileServicesOpen ? "show" : ""}`}>
     <li><a href="/Software">Software Development</a></li>
     <li><a href="/mobile">Mobile Development</a></li>
@@ -147,7 +147,7 @@ const [mobileContactOpen, setMobileContactOpen] = useState(false);
   className="mobile-dropdown-toggle"
   onClick={() => setMobileContactOpen((prev) => !prev)}
 >
-  Contact +
+  Contact -
   <ul className={`mobile-submenu ${mobileContactOpen ? "show" : ""}`}>
     <li><a href="tel:+918955100493">📞 Call Us</a></li>
     <li><a href="https://wa.me/918955100493" target="_blank" rel="noopener noreferrer">💬 WhatsApp</a></li>
